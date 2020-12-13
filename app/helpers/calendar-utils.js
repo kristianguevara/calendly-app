@@ -10,7 +10,7 @@ window.$.fn.calendar = function (options) {
 
     this.each(function () {
         var $calendarElement = window.$(this);
-        $calendarElement.attr('id', "calendar_" + Math.floor(Math.random() * 99999).toString(36));
+        $calendarElement.attr('id', 'calendar_' + Math.floor(Math.random() * 99999).toString(36));
 
         $calendarElement.data('initYear', opts.year);
         $calendarElement.data('initMonth', opts.month);
@@ -304,15 +304,15 @@ window.$.fn.calendar_defaults = function () {
     var day = now.getDate();
 
     var settings = {
-        language: false, //You can customize your own months and days
+        language: false, //You can customize your own months and days. Putting false by default
         year: year,
         month: month,
         day: day,
         show_previous: true, //Should a user wish to remove prev button. Navigate through future months only
         show_next: true, //Should a user wish to remove next button. Navigate through past months only
-        cell_border: false, //Add border or not
+        cell_border: true, //Add border or not
         show_days: true, //Show days of the week. Can be false to display straight on days
-        weekstartson: 0, //Sunday = 0, Monday = 1
+        weekstartson: 0, //Making this either Sunday = 0 or Monday = 1
         action: false //Just a placeholder for function. No need to mess with it
     };
     return settings;
@@ -327,13 +327,13 @@ window.$.fn.calendar_language = function (lang) {
     switch (lang.toLowerCase()) {
         case 'en':
             return {
-                month_labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                dow_labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+                month_labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                dow_labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
             };
         case 'ph':
             return {
-                month_labels: ["Enero", "Pebrero", "Marso", "Abril", "Mayo", "Hunyo", "Hulyo", "Agosto", "Setyembre", "Oktubre", "Nobyembre", "Disyembre"],
-                dow_labels: ["Lunes", "Martes", "Miyerkules", "Huwebes", "Biyernes", "Sabado", "Linggo"]
+                month_labels: ['Enero', 'Pebrero', 'Marso', 'Abril', 'Mayo', 'Hunyo', 'Hulyo', 'Agosto', 'Setyembre', 'Oktubre', 'Nobyembre', 'Disyembre'],
+                dow_labels: ['Lunes', 'Martes', 'Miyerkules', 'Huwebes', 'Biyernes', 'Sabado', 'Linggo']
             };
     }
 
