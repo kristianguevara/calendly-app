@@ -178,13 +178,38 @@ window.$.fn.calendar = function (options) {
                 }
             }
 
+            var disabledDayCount = 0;
+            var prevDays = [];
+
             for (var wk = 0; wk < weeksInMonth; wk++) {
                 var $dowRow = window.$('<tr class="calendar-dow"></tr>');
                 for (var dow = 0; dow < 7; dow++) {
+                    var dateId = $calendarElement.attr('id') + '_' + dateAsString(year, month, currDayOfMonth);
+
                     if (dow < firstDow || currDayOfMonth > lastDayinMonth) {
-                        $dowRow.append('<td></td>');
+                        var dateObj = new Date(year, month, 1, 0, 0, 0, 0);
+
+                        if(currDayOfMonth < lastDayinMonth) {
+                            dateObj.setDate(disabledDayCount);
+                            disabledDayCount--;
+                            prevDays.push('<td><div class="day disabled-day">' + dateObj.getDate() + '</div></td>')
+                        } else {
+                            dateObj.setDate(disabledDayCount);
+                            disabledDayCount++;
+                            $dowRow.append('<td><div class="day disabled-day">' + dateObj.getDate() + '</div></td>');
+                        }
+                        
                     } else {
-                        var dateId = $calendarElement.attr('id') + '_' + dateAsString(year, month, currDayOfMonth);
+                        
+                        if(prevDays.length) {
+                            prevDays.reverse()
+                            for(var rev = 0; rev < prevDays.length; rev++) {
+                                $dowRow.append(prevDays[rev]);
+                            }
+                            prevDays = [];
+                            disabledDayCount = 1;
+                        }
+
                         var dayId = dateId + '_day';
 
                         var $dayElement = window.$('<div id="' + dayId + '" class="day" >' + currDayOfMonth + '</div>');
@@ -291,7 +316,7 @@ window.$.fn.calendar = function (options) {
             }
             return false;
         }
-    }); // each()
+    });
 
     return this;
 };

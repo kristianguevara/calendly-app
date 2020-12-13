@@ -74,6 +74,10 @@
     padding-top: 7px;
     padding-bottom: 7px;
   }
+
+  div.calendar .table tr td div.disabled-day {
+    color: #b3afaf;
+  }
   
   /* actions and events */
   div.calendar .table tr td.event div.day,
